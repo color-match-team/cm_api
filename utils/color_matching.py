@@ -28,7 +28,7 @@ color_to_match = {
     "A": 13.480786348810863,
     "B": -25.02938394226518
 }
-
+"""
 def rgb2lab ( inputColor ) :
 
    num = 0
@@ -86,6 +86,45 @@ def rgb2lab ( inputColor ) :
    }
    return lab_dict
 
+import math
+"""
+def rgb2lab(color):
+    # Convert hex to RGB
+    r = color[0]/255
+    g = color[1]/255
+    b = color[2]/255
 
+    # Assuming sRGB (D65)
+    r = r / 12.92 if r <= 0.04045 else math.pow((r + 0.055) / 1.055, 2.4)
+    g = g / 12.92 if g <= 0.04045 else math.pow((g + 0.055) / 1.055, 2.4)
+    b = b / 12.92 if b <= 0.04045 else math.pow((b + 0.055) / 1.055, 2.4)
+
+    # Convert to XYZ
+    X = r * 0.4124564 + g * 0.3575761 + b * 0.1804375
+    Y = r * 0.2126729 + g * 0.7151522 + b * 0.072175
+    Z = r * 0.0193339 + g * 0.119192 + b * 0.9503041
+
+    # D65 standard referent
+    ref_X = 0.95047
+    ref_Y = 1.0
+    ref_Z = 1.08883
+
+    # Convert to Lab
+    X = X / ref_X
+    Y = Y / ref_Y
+    Z = Z / ref_Z
+
+    X = math.pow(X, 1/3) if X > 0.008856 else 7.787 * X + 16 / 116
+    Y = math.pow(Y, 1/3) if Y > 0.008856 else 7.787 * Y + 16 / 116
+    Z = math.pow(Z, 1/3) if Z > 0.008856 else 7.787 * Z + 16 / 116
+
+    L = 116 * Y - 16
+    A = 500 * (X - Y)
+    B = 200 * (Y - Z)
+
+    return {"L": L, "A": A, "B": B}
+
+# Example usage
+#print(hex_to_cielab("#FF5733"))
 
 #print(find_shortest_distance(color_to_match, sample))

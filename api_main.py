@@ -31,10 +31,11 @@ def image_color_pallete():
     #json_file = request.load(json_data)
     #json_data = json.load(json_file)
 
-    pallete = image_utils.pallette(file.filename, 2)
+    pallete = image_utils.pallette(file.filename, 4)
     print(pallete)
     for i in range(len(pallete)):
         LAB = color_matching.rgb2lab(pallete[i])
+        print(LAB)
         print(color_matching.find_shortest_distance(LAB, sample))
     return str(pallete)
 
