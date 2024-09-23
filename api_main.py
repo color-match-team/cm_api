@@ -28,10 +28,13 @@ def image_color_pallete():
     file = request.files['image']
     print(file.filename)
     file.save(file.filename)
+    print(request)
+    data = request.data
+    print(data)
     #json_file = request.load(json_data)
     #json_data = json.load(json_file)
 
-    pallete = image_utils.pallette(file.filename, 4)
+    pallete = image_utils.pallette(file.filename, 2)
     print(pallete)
     for i in range(len(pallete)):
         LAB = color_matching.rgb2lab(pallete[i])
