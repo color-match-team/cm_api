@@ -47,17 +47,16 @@ app.get("/", (req, res) =>{
 
 // Have Node serve the files for our built React app
 //app.use(express.static(path.resolve(__dirname, "../client/build")));
-
+/*
 app.post("/api", (req, res) => {
   console.log(req.body);
   console.log(distance(color_to_match, req.body.color));
   res.send("Hello");
 })
-
-app.get("/api", (req, res) => {
-  res.send("Hello");
-});
-  /*
+*/
+app.post("/api", (req, res) => {
+  //res.send("Hello");
+  console.log(req.body);
   var result = find_shortest_distance(req.body.color, sample);
  
   res.status(200).json({
@@ -67,7 +66,6 @@ app.get("/api", (req, res) => {
     brand: result.brand,
   });
 });
-*/
 
 // All other GET requests not handled before will return our React app
 app.get("*", (req, res) => {
