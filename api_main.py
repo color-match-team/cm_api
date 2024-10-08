@@ -1,8 +1,12 @@
 from flask import Flask, request, jsonify
 from utils import image_utils, color_matching
+from flask_cors import CORS, cross_origin
 import json
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 with open('sample_data.json') as f:
     sample = json.load(f)
 
