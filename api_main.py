@@ -4,7 +4,7 @@ from flask_cors import CORS, cross_origin
 import json
 
 app = Flask(__name__)
-cors = CORS(app)
+cors = CORS(app, origins=["http://localhost:3000", "https://www.colormatch.works/"])
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 with open('sample_data.json') as f:
