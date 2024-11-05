@@ -4,7 +4,7 @@ from flask_cors import CORS, cross_origin
 import json
 
 app = Flask(__name__)
-cors = CORS(app, origins=["http://localhost:3000", "https://www.colormatch.works/"])
+cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 with open('sample_data.json') as f:
@@ -15,6 +15,7 @@ def hello_world():
     return 'Hello, World!'
 
 @app.route('/api', methods=['POST'])
+@cross_origin()
 def api():
     data = request.json
     print(data)
@@ -27,6 +28,7 @@ def api():
     }), 200
 
 @app.route('/image', methods=['POST'])
+@cross_origin()
 def image_color_pallete():
     #print('hey image')
     file = request.files['image']
