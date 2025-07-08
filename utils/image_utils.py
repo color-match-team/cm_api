@@ -25,4 +25,4 @@ def pallette(image_uploaded, n_colors):
     return list(map(tuple, colors))
 
 
-#print(pallette("testing_images/zushi.jpg", 2))
+print(pallette("testing_images/zushi.jpg", 2))
